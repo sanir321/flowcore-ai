@@ -65,6 +65,7 @@ export default function StickyFeatures() {
                                     : 'border-gray-100 hover:border-gray-200'
                                     }`}
                                 onMouseEnter={() => setActiveFeature(index)}
+                                onClick={() => setActiveFeature(index)}
                             >
                                 <div className={`flex items-center gap-3 mb-4 transition-colors ${activeFeature === index ? 'text-brand-orange' : 'text-gray-400 group-hover:text-gray-600'
                                     }`}>
@@ -79,13 +80,63 @@ export default function StickyFeatures() {
 
                                 <p className={`text-lg leading-relaxed transition-all duration-500 ${activeFeature === index
                                     ? 'text-slate-600 opacity-100 max-h-40'
-                                    : 'text-gray-300 opacity-60 max-h-0 overflow-hidden'
+                                    : 'text-gray-300 opacity-60 max-h-0 lg:max-h-0 overflow-hidden' /* On mobile we might want to keep it visible or expandable */
                                     }`}>
                                     {feature.description}
                                 </p>
 
+                                {/* Mobile Visual (Shown inline) */}
+                                <div className={`lg:hidden mt-8 transition-all duration-500 overflow-hidden ${activeFeature === index ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0'}`}>
+                                    <div className="bg-brand-gray rounded-2xl overflow-hidden border border-slate-100 shadow-lg">
+                                        <div className="p-6 bg-gray-50 flex items-center justify-center">
+                                            {/* Reuse the visual logic here */}
+                                            {index === 0 && (
+                                                <div className="w-full max-w-sm bg-white rounded-xl shadow-md border border-gray-100 p-4 space-y-4">
+                                                    <div className="flex gap-3">
+                                                        <div className="w-8 h-8 rounded-full bg-gray-200 shrink-0" />
+                                                        <div className="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-xs text-gray-500 w-full">Can I get a refund?</div>
+                                                    </div>
+                                                    <div className="flex gap-3 flex-row-reverse">
+                                                        <div className="w-8 h-8 rounded-full bg-brand-orange shrink-0" />
+                                                        <div className="bg-orange-50 p-3 rounded-2xl rounded-tr-none text-xs text-gray-700 w-full border border-orange-100">
+                                                            <span className="block text-[10px] text-orange-600 font-bold mb-1 uppercase">Sentiment: Frustrated</span>
+                                                            Checking policy... Yes. Processing.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {index === 1 && (
+                                                <div className="w-full max-w-sm bg-white rounded-xl shadow-md border border-gray-100 p-6">
+                                                    <div className="flex justify-between items-center mb-6">
+                                                        <div className="text-sm font-bold text-gray-900">Logic Flow</div>
+                                                        <div className="h-2 w-2 rounded-full bg-green-500" />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <div className="h-8 bg-gray-50 rounded border border-gray-200 flex items-center px-3 text-xs font-mono text-gray-500">Input: Refund</div>
+                                                        <div className="flex justify-center"><div className="w-[1px] h-3 bg-gray-300" /></div>
+                                                        <div className="h-8 bg-orange-50 rounded border border-orange-200 flex items-center px-3 text-xs font-mono text-orange-700 font-bold">Approve</div>
+                                                        <div className="flex justify-center"><div className="w-[1px] h-3 bg-gray-300" /></div>
+                                                        <div className="h-8 bg-gray-50 rounded border border-gray-200 flex items-center px-3 text-xs font-mono text-gray-500">Action: Stripe</div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {index === 2 && (
+                                                <div className="relative w-full py-8 flex items-center justify-center">
+                                                    <div className="bg-white p-4 rounded-xl shadow-md border border-gray-200 z-10 flex items-center gap-3">
+                                                        <div className="p-2 bg-green-100 rounded-lg text-green-600"><Zap className="w-4 h-4" /></div>
+                                                        <div>
+                                                            <div className="text-sm font-bold">Action Done</div>
+                                                            <div className="text-xs text-gray-500">Refund #9928</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {activeFeature === index && (
-                                    <div className="mt-6 flex items-center text-brand-orange font-medium text-sm gap-1">
+                                    <div className="mt-6 flex items-center text-brand-orange font-medium text-sm gap-1 lg:flex hidden">
                                         Learn more <ChevronRight className="w-4 h-4" />
                                     </div>
                                 )}

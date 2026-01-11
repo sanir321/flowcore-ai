@@ -276,16 +276,63 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     className="absolute top-full left-0 right-0 bg-white text-brand-dark border-b border-gray-100 p-4 md:hidden shadow-lg"
                 >
-                    <div className="flex flex-col gap-4">
-                        <a href="#" className="text-base font-medium">Industries</a>
-                        <a href="#capabilities" className="text-base font-medium">Customers</a>
-                        <a href="#solutions" className="text-base font-medium">Pricing</a>
-                        <hr className="border-gray-100" />
-                        <a href="#cta" className="w-full text-left text-base font-medium">Book Demo</a>
-                        <a href="#how-it-works" className="w-full bg-brand-dark text-white px-4 py-3 rounded-lg text-base font-medium flex items-center justify-between">
-                            Product Tour
-                            <ArrowRight className="w-4 h-4" />
-                        </a>
+                    <div className="flex flex-col gap-2">
+                        {/* Industries Accordion */}
+                        <div>
+                            <button
+                                onClick={() => setActiveDropdown(activeDropdown === 'industries' ? null : 'industries')}
+                                className="flex items-center justify-between w-full text-base font-medium py-2 text-gray-900"
+                            >
+                                Industries
+                                <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'industries' ? 'rotate-180' : ''}`} />
+                            </button>
+                            {activeDropdown === 'industries' && (
+                                <div className="pl-4 py-2 space-y-4">
+                                    {industries.map((item, idx) => (
+                                        <div key={idx} className="flex gap-3 items-center">
+                                            <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-500">
+                                                <item.icon className="w-4 h-4" />
+                                            </div>
+                                            <span className="text-sm font-medium text-gray-700">{item.title}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        <a href="#capabilities" className="text-base font-medium py-2 text-gray-900 border-b border-gray-50">Customers</a>
+                        <a href="#solutions" className="text-base font-medium py-2 text-gray-900 border-b border-gray-50">Pricing</a>
+
+                        {/* Resources Accordion */}
+                        <div>
+                            <button
+                                onClick={() => setActiveDropdown(activeDropdown === 'resources' ? null : 'resources')}
+                                className="flex items-center justify-between w-full text-base font-medium py-2 text-gray-900"
+                            >
+                                Resources
+                                <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'resources' ? 'rotate-180' : ''}`} />
+                            </button>
+                            {activeDropdown === 'resources' && (
+                                <div className="pl-4 py-2 space-y-4">
+                                    {resources.map((item, idx) => (
+                                        <div key={idx} className="flex gap-3 items-center">
+                                            <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-500">
+                                                <item.icon className="w-4 h-4" />
+                                            </div>
+                                            <span className="text-sm font-medium text-gray-700">{item.title}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="mt-4 flex flex-col gap-3">
+                            <a href="#cta" className="w-full text-center py-3 rounded-lg border border-gray-200 text-base font-medium text-gray-900 hover:bg-gray-50 transition-colors">Book Demo</a>
+                            <a href="#how-it-works" className="w-full bg-brand-dark text-white px-4 py-3 rounded-lg text-base font-medium flex items-center justify-center gap-2 hover:bg-black transition-colors">
+                                Product Tour
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                        </div>
                     </div>
                 </motion.div>
             )}
